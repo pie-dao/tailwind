@@ -83,7 +83,248 @@ for (i; i <= 240; i++) {
   rems[i] = `${BigNumber(i).dividedBy(4).toString()}rem`;
 }
 
-module.exports = plugin(() => {}, {
+module.exports = plugin(({ addBase, addComponents, addUtilities, theme }) => {
+  const roboto = {
+    /* cyrillic-ext */
+    '@font-face': {
+      'font-family': 'Roboto Mono',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Roboto Mono Light\'), local(\'RobotoMono-Light\'), url(https://fonts.gstatic.com/s/robotomono/v7/L0xkDF4xlVMF-BfR8bXMIjDgiWq8f7-7Ag.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F',
+    },
+    /* cyrillic */
+    '@font-face': {
+      'font-family': 'Roboto Mono',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Roboto Mono Light\'), local(\'RobotoMono-Light\'), url(https://fonts.gstatic.com/s/robotomono/v7/L0xkDF4xlVMF-BfR8bXMIjDgiWq1f7-7Ag.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+    },
+    /* greek-ext */
+    '@font-face': {
+      'font-family': 'Roboto Mono',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Roboto Mono Light\'), local(\'RobotoMono-Light\'), url(https://fonts.gstatic.com/s/robotomono/v7/L0xkDF4xlVMF-BfR8bXMIjDgiWq9f7-7Ag.woff2) format(\'woff2\')',
+      'unicode-range': 'U+1F00-1FFF',
+    },
+    /* greek */
+    '@font-face': {
+      'font-family': 'Roboto Mono',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Roboto Mono Light\'), local(\'RobotoMono-Light\'), url(https://fonts.gstatic.com/s/robotomono/v7/L0xkDF4xlVMF-BfR8bXMIjDgiWqyf7-7Ag.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0370-03FF',
+    },
+    /* vietnamese */
+    '@font-face': {
+      'font-family': 'Roboto Mono',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Roboto Mono Light\'), local(\'RobotoMono-Light\'), url(https://fonts.gstatic.com/s/robotomono/v7/L0xkDF4xlVMF-BfR8bXMIjDgiWq-f7-7Ag.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB',
+    },
+    /* latin-ext */
+    '@font-face': {
+      'font-family': 'Roboto Mono',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Roboto Mono Light\'), local(\'RobotoMono-Light\'), url(https://fonts.gstatic.com/s/robotomono/v7/L0xkDF4xlVMF-BfR8bXMIjDgiWq_f7-7Ag.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF',
+    },
+    /* latin */
+    '@font-face': {
+      'font-family': 'Roboto Mono',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Roboto Mono Light\'), local(\'RobotoMono-Light\'), url(https://fonts.gstatic.com/s/robotomono/v7/L0xkDF4xlVMF-BfR8bXMIjDgiWqxf78.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+    },
+  };
+
+  const rubik = {
+    /* cyrillic */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Light\'), local(\'Rubik-Light\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7Fqj2mZ8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+    },
+    /* hebrew */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Light\'), local(\'Rubik-Light\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7Fqj2mf8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F',
+    },
+    /* latin-ext */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Light\'), local(\'Rubik-Light\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7Fqj2mT8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF',
+    },
+    /* latin */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '300',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Light\'), local(\'Rubik-Light\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7Fqj2md8WA.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+    },
+    /* cyrillic */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '500',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Medium\'), local(\'Rubik-Medium\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7EyjmmZ8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+    },
+    /* hebrew */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '500',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Medium\'), local(\'Rubik-Medium\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7Eyjmmf8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F',
+    },
+    /* latin-ext */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '500',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Medium\'), local(\'Rubik-Medium\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7EyjmmT8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF',
+    },
+    /* latin */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '500',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Medium\'), local(\'Rubik-Medium\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7Eyjmmd8WA.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+    },
+    /* cyrillic */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '700',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Bold\'), local(\'Rubik-Bold\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7F6iGmZ8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116',
+    },
+    /* hebrew */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '700',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Bold\'), local(\'Rubik-Bold\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7F6iGmf8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F',
+    },
+    /* latin-ext */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '700',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Bold\'), local(\'Rubik-Bold\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7F6iGmT8WDm7Q.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF',
+    },
+    /* latin */
+    '@font-face': {
+      'font-family': 'Rubik',
+      'font-style': 'normal',
+      'font-weight': '700',
+      'font-display': 'swap',
+      'src': 'local(\'Rubik Bold\'), local(\'Rubik-Bold\'), url(https://fonts.gstatic.com/s/rubik/v9/iJWHBXyIfDnIV7F6iGmd8WA.woff2) format(\'woff2\')',
+      'unicode-range': 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD',
+    },
+  };
+
+  const html = {
+    '-webkit-overflow-scrolling': 'touch',
+    'background-color': theme('colors.white'),
+    'font-family': theme('fontFamily.primary'),
+    'margin': '0',
+    'scroll-behavior': 'smooth',
+  };
+
+  addBase(roboto);
+  addBase(rubik);
+
+  addBase({
+    'body': html,
+    'html': html,
+  });
+
+  addComponents({
+    '.btn': {
+      'background': 'linear-gradient(-60deg, #cb1a8f, #fc02a7)',
+      'border-radius': '5px',
+      'border-style': 'none',
+      'color': theme('colors.white'),
+      'font-family': theme('fontFamily.primary'),
+      'font-weight': theme('fontWeight.bold'),
+      'margin-bottom': '20px',
+      'margin-top': '10px',
+      'min-width': '150px',
+      'padding': '20px',
+      'text-align': 'center',
+      'transition-duration': '0.3s',
+      'transition-property': 'background-color, color',
+
+      '&:disabled': {
+        'background': `${theme('colors.grey')} !important`,
+        'pointer-events': 'none',
+        'transition': 'none !important',
+      },
+      '&:hover': {
+        'color': theme('colors.white'),
+        'cursor': theme('cursor.pointer'),
+        'opacity': theme('opacity.80'),
+      },
+      '&:focus': {
+        'outline': 'none',
+      },
+      '&.modal': {
+        'background-size': '100%',
+        'margin-top': '30px',
+      },
+    },
+  });
+
+  addUtilities({
+    '.content': {
+      'align-items': 'center',
+      'display': 'flex',
+      'flex-direction': 'column',
+      'margin': 'auto',
+      'max-width': '1280px',
+      'width': '96%',
+    },
+    '.pointer': { cursor: theme('cursor.pointer') },
+  });
+}, {
   theme: {
     backgroundColor: { ...colors },
     borderRadius: {
@@ -142,8 +383,8 @@ module.exports = plugin(() => {}, {
       },
     },
     fontFamily: {
-      'primary': ['Rubik', 'sans-serif'],
-      'secondary': ['Roboto', 'monospace'],
+      'primary': 'Rubik, sans-serif',
+      'secondary': 'Roboto, monospace',
     },
     fontSize: {
       xxs: '0.8rem',
