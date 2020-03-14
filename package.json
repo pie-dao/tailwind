@@ -1,0 +1,13 @@
+{
+  "name": "@pie-dao/tailwind",
+  "version": "1.0.0",
+  "description": "PieDAO tailwindcss plugin for providing all default styles and classes.",
+  "main": "index.js",
+  "repository": "https://github.com/pie-dao/tailwind.git",
+  "author": "Dan Matthews <dan@cryptobuilders.io>",
+  "license": "MIT",
+  "dependencies": {
+    "bignumber.js": "^9.0.0",
+    "tailwindcss": "^1.2.0"
+  }
+}
