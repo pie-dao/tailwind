@@ -1,0 +1,28 @@
+module.exports = {
+  'black': '#000000',
+  'blue': '#7d78d1',
+  'green': '#2db400',
+  'grey': '#b7b7b7',
+  'pink': '#f40a50',
+  'red': '#ff0000',
+  'white': '#ffffff',
+
+  'grey-10': '#0a0a0a',
+  'grey-51': '#333333',
+  'grey-115': '#737373',
+  'grey-204': '#cccccc',
+  'grey-230': '#e6e6e6',
+  'grey-243': '#f3f3f3',
+  'grey-246': '#f6f6f6',
+
+  'label-blue': '#305cee',
+  'label-cyan': '#1ec0ff',
+  'label-gradient': 'linear-gradient(to right, #f10096 0%, #21d7ff 100%)',
+  'label-green': '#2db400',
+  'label-pink': '#fc02a7',
+  'label-purple': '#9080dc',
+  'label-red': '#ff0053',
+  'label-teal': '#79f2c3',
+  'label-yellow': '#f8e71c',
+  'label-yellow-alt': '#ffcd1d',
+};

@@ -1,13 +1,22 @@
 {
   "name": "@pie-dao/tailwind",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "PieDAO tailwindcss plugin for providing all default styles and classes.",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/pie-dao/tailwind.git",
   "author": "Dan Matthews <dan@cryptobuilders.io>",
   "license": "MIT",
+  "scripts": {
+    "lint": "npx eslint src/*.js src/**/*.js",
+    "release": "yarn lint && npm publish --access=public"
+  },
   "dependencies": {
     "bignumber.js": "^9.0.0",
     "tailwindcss": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1"
   }
 }
