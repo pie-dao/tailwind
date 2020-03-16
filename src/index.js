@@ -26,6 +26,7 @@ const spacing = require('./theme/spacing');
 // Components
 
 const btn = require('./components/btn');
+const overlay = require('./components/overlay');
 
 // Utilities
 
@@ -56,6 +57,7 @@ module.exports = plugin(({
 
   addUtilities({
     ...content,
+    ...overlay,
     ...pointer,
   });
 }, {
