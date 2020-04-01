@@ -1,4 +1,9 @@
+const sizes = require('../core/sizes');
+const { vws } = sizes;
+
 module.exports = {
+  ...vws,
+
   xxs: '0.8rem',
   xs: '0.83rem',
   sm: '0.9rem',
